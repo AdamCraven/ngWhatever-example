@@ -1,3 +1,5 @@
-#ngWhatever - A better structure for Angular modules - An example
+#ngWhatever - A better structure for Angular modules
+
+An example.
 
 
