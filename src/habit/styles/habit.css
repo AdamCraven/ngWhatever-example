@@ -1,0 +1,21 @@
+.habit-table td.negative {
+    background: #E74C3C;
+}
+
+.habit-table td.neutral {
+    background: #95A5A6;
+}
+
+.habit-table td.positive {
+    background: #2ECC71;
+}
+
+.habit-table td input {
+    background: transparent;
+    border: 0;
+    width: 100%;
+}
+
+.loading {
+    opacity: 0.5;
+}

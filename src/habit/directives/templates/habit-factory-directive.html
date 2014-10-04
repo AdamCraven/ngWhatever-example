@@ -1,0 +1,47 @@
+
+<table class="habit-table table table-bordered palette palette-turquoise" ng-class="{'loading':controller.isLoading()}">
+    <colgroup>
+        <col></col>
+        <col></col>
+        <col></col>
+        <col></col>
+        <col></col>
+        <col></col>
+        <col style="background:#16a085"></col>
+        <col></col>
+        <col></col>
+        <col></col>
+        <col></col>
+    </colgroup>
+    <thead>
+        <tr>
+            <th></th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+            <th>Pts</th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        <tr ng-repeat="habit in controller.getHabits()">
+            <td>
+                {{habit.name}}
+            </td>
+            <td class="{{day.className()}}" ng-repeat="day in controller.getEventsFilteredByHabit(habit)">
+                <input type="number" hf-model="day.getSetPoints()" ng-model="day.points" />
+            </td>
+            <td>
+                {{ controller.getTotalPointsForHabit(habit) }}
+            </td>
+        </tr>
+        <tr>
+            <td><button ng-click="controller.save()" class="btn btn-block btn-info">Save</button></td>
+            <td colspan="7" style="text-align:right;border-right-color:#1ABC9C">Habit points this week</td>
+            <td>{{ controller.getTotalPoints() }}</td>
+        </td>
+    </tbody>
+</table>
