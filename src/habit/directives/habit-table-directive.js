@@ -9,8 +9,8 @@ define([
         return {
             restrict: 'E',
             template: template,
-            scope : {},
-            controller : 'habitController'
+            scope : {},//
+            controller : 'habitController as controller'
         };
     };
 });

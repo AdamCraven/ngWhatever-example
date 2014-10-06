@@ -2,8 +2,6 @@ define(function() {
     "use strict";
 
     function HabitFactoryController($scope, moduleController) {
-        // Make all the controllers methods accessible to the view
-        $scope.controller = this;
         this.moduleController = moduleController;
         this.model = moduleController.model;
     }
