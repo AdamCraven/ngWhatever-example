@@ -9,7 +9,7 @@ define([
         return {
             restrict: 'E',
             template: template,
-            scope : {},//
+            scope : {},
             controller : 'habitController as controller'
         };
     };
