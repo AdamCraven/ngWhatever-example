@@ -5,16 +5,11 @@ define([
 ) {
     "use strict";
 
-    function HabitModuleController($timeout, $q, habitEndpoint, eventEndpoint) {
+    function HabitModuleController($timeout, endpoint) {
         this.model = new HabitModuleModel();
         this.view = {};
         this.$timeout = $timeout;
-        this.$q = $q;
-
-        this.endpoints = {
-            habit: habitEndpoint,
-            event: eventEndpoint
-        };
+        this.endpoint = endpoint;
     }
 
     HabitModuleController.prototype = {
@@ -42,14 +37,12 @@ define([
         fetchData: function() {
             this.model.loading.setLoading();
 
-            this.$q.all([this.endpoints.habit.get(), this.endpoints.event.get()])
+            this.endpoint.getHabitsAndEvents()
                 .then(function habitsAndEventsLoaded(habitsAndEvents) {
-
                     this.model.create({
                         habits: habitsAndEvents[0],
                         events: habitsAndEvents[1]
                     });
-
                     this.success();
                 }.bind(this));
         },
@@ -67,12 +60,14 @@ define([
         success: function() {
             this.model.error.clearErrors();
             this.model.loading.finishLoading();
+            // The refresh view isn't needed with angular $q promises, but if you are using an external
+            // library, this would be required.
             this.refreshView();
         }
 
     };
 
-    HabitModuleController.$inject = ['$timeout', '$q', 'habitEndpoint', 'eventEndpoint'];
+    HabitModuleController.$inject = ['$timeout', 'habitModuleEndpoint'];
 
     return HabitModuleController;
 });

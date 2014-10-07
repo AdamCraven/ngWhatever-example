@@ -2,6 +2,7 @@ define([
     './controllers/habit-controller',
     './directives/habit-table-directive',
     './module-controllers/habit-module-controller',
+    './endpoints/habit-module-endpoint',
     './endpoints/habit-endpoint',
     './endpoints/event-endpoint',
     './config/habit-config',
@@ -10,6 +11,7 @@ define([
     HabitController,
     habitDirective,
     HabitModuleController,
+    HabitModuleEndpoint,
     HabitEndpoint,
     EventEndpoint,
     habitConfig,
@@ -24,6 +26,7 @@ define([
         .service('habitModuleController', HabitModuleController)
         .service('habitEndpoint', HabitEndpoint)
         .service('eventEndpoint', EventEndpoint)
+        .service('habitModuleEndpoint', HabitModuleEndpoint)
         .service('habitApi', HabitApi);
 
     return module;
