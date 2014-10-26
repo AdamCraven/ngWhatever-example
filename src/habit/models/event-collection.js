@@ -5,33 +5,6 @@ define([
 ) {
     "use strict";
 
-
-    function addMissingDates(eventDates, dateFrom, dateTo, habitId) {
-        var total = [];
-        var dateRangeInDays = moment(dateTo).diff(dateFrom, 'days') + 1;
-        if (dateRangeInDays < 0) {
-            throw new Error('dateFrom and dateTo in wrong order');
-        }
-        var currentDay = 0;
-
-        for (var i = 0; i < dateRangeInDays; i++) {
-            var dayToCheck = moment(dateFrom).add('days', i).startOf('day');
-            var dayIndex = (eventDates[currentDay] && moment(eventDates[currentDay].date).startOf('day'));
-
-            if (dayToCheck.isSame(dayIndex) ) {
-                total.push(eventDates[currentDay]);
-                currentDay++;
-            } else {
-                total.push(new EventModel({
-                    date:dayToCheck.format('YYYY-MM-DD'),
-                    habitId: habitId
-                }));
-            }
-        }
-
-        return total;
-    }
-
     function EventCollection(eventArr) {
         this._events = [];
         if(eventArr) {

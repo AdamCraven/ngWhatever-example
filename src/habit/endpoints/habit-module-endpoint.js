@@ -14,6 +14,9 @@ define([
     HabitModuleEndpoint.prototype = {
         getHabitsAndEvents: function () {
             return this.$q.all([this.habitEndpoint.get(), this.eventEndpoint.get()]);
+        },
+        saveHabitsAndEvents: function (habit, events) {
+            this.$q.all([this.habitEndpoint.save(habits), this.eventEndpoint.save(events)]);
         }
 
     };

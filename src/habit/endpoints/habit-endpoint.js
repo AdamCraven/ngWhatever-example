@@ -20,6 +20,15 @@ define([
             }, config.endpoints.loadingTime);
 
             return deferred.promise;
+        },
+        save: function(habitsUnparsed) {
+            var deferred = this.$q.defer();
+
+            setTimeout(function() {
+                deferred.resolve();
+            }, config.endpoints.loadingTime);
+
+            return deferred.promise;
         }
 
     };

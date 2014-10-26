@@ -1,4 +1,8 @@
-define(function () {
+define([
+    './habit-model'
+], function (
+    HabitModel
+) {
     "use strict";
 
     function generateId() {
@@ -15,22 +19,11 @@ define(function () {
     HabitCollection.prototype = {
         create: function (habitsArr) {
             this._habits = habitsArr.map(function (habit) {
-                return {
-                    name : habit.name,
-                    id: habit.id || generateId()
-                };
+                return new HabitModel(habit);
             });
         },
         read: function () {
             return this._habits;
-        },
-        update: function (habitToUpdate) {
-            var habit = this._habits.filter(function (habit) {
-                if (habit.id === habitToUpdate.id) {
-                    return true;
-                }
-            });
-            habit[0].name = habitToUpdate.name;
         },
         remove: function () {
             // not implemented

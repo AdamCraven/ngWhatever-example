@@ -1,5 +1,7 @@
 
-<table class="habit-table table table-bordered palette palette-turquoise" ng-class="{'loading':controller.isLoading()}">
+<table
+    class="habit-table table table-bordered palette palette-turquoise"
+    ng-class="{ 'loading': controller.isLoading() }">
     <colgroup>
         <col></col>
         <col></col>
@@ -27,20 +29,34 @@
         </tr>
     </thead>
     <tbody class="tbody">
+        <!-- Loop over the habitModels -->
         <tr ng-repeat="habit in controller.getHabits()">
             <td>
-                {{habit.name}}
+                <!-- Display the name -->
+                <input type="text" ng-model="habit.name" />
+                <!--
+                We are bound the habitModels implementation, but using the controller like so has allowed us to avoid knowing how the model is structured.
+
+                It would look like this without the controller: model.habits.read($index).name
+
+                The view stays clean, knows about parts of the models functionaltiy that is important and would allow us to change the model structure without much work.
+                -->
             </td>
-            <td class="{{day.className()}}" ng-repeat="day in controller.getEventsFilteredByHabit(habit)">
-                <input type="number" hf-model="day.getSetPoints()" ng-model="day.points" />
+            <!-- Loop over the eventModels -->
+            <td ng-repeat="event in controller.getEventsFilteredByHabit(habit)" class="{{event.rating()}}" >
+                <input type="number" ng-model="event.points" />
             </td>
             <td>
                 {{ controller.getTotalPointsForHabit(habit) }}
             </td>
         </tr>
         <tr>
-            <td><button ng-click="controller.save()" class="btn btn-block btn-info">Save</button></td>
-            <td colspan="7" style="text-align:right;border-right-color:#1ABC9C">Habit points this week</td>
+            <td>
+                <button
+                    ng-click="controller.save()"
+                    class="btn btn-block btn-info">Save</button>
+            </td>
+            <td colspan="7" class="bottom-expanded-row">Habit points this week</td>
             <td>{{ controller.getTotalPoints() }}</td>
         </td>
     </tbody>

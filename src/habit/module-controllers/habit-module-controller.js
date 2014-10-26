@@ -48,7 +48,13 @@ define([
         },
 
         save: function(argument) {
-            //Save to server
+            this.model.loading.setLoading();
+
+            this.endpoint.saveHabitAndEvents(this.model.habits.read(), this.model.events.read())
+                .then(
+                    this.success.bind(this),
+                    this.fail.bind(this)
+                );
         },
 
         fail: function(error) {

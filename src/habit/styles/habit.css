@@ -19,3 +19,8 @@
 .loading {
     opacity: 0.5;
 }
+
+.habit-table td.bottom-expanded-row {
+    text-align:right;
+    border-right-color:#1ABC9C;
+}

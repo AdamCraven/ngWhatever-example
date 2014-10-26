@@ -13,6 +13,7 @@ define([
     "use strict";
 
     function HabitModuleModel(modelData) {
+        // The controllers use public objects to the display the view.
         this.loading = new LoadingModel();
         this.error = new ErrorModel();
         this.habits = new HabitCollection();
