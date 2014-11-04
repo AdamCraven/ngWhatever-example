@@ -1,8 +1,8 @@
 define(function() {
     "use strict";
 
-    // The event parser transforms data between the client and server
-    var eventParser = {
+    // The habit parser transforms data between the client and server
+    var habitParser = {
         // Transform client data to server
         encode: function(data) {
             // implementation goes here
@@ -15,5 +15,5 @@ define(function() {
         }
     };
 
-    return eventParser;
+    return habitParser;
 });

@@ -1,11 +1,12 @@
 define([
-    '../config/habit-config'
+    '../config/habit-config',
+    './habit-parser'
 ], function(
-    config
+    config,
+    habitParser
 ) {
     "use strict";
 
-    var habitDataFromServer =  config.endpoints.habits;
 
     function HabitEndpoint($q) {
         this.$q = $q;
@@ -14,9 +15,14 @@ define([
     HabitEndpoint.prototype = {
         get: function () {
             var deferred = this.$q.defer();
+            var serverFormattedHabits = config.endpoints.habits;
 
-            setTimeout(function () {
-                deferred.resolve(habitDataFromServer);
+            setTimeout(function fakeServerRequest() {
+                // Often when getting data from the server, the format the client expects it
+                // may be slightly different from what the server sends.
+                // A parsing function is used to transform the data
+                var clientFormattedHabits = habitParser.decode(serverFormattedHabits);
+                deferred.resolve(clientFormattedHabits);
             }, config.endpoints.loadingTime);
 
             return deferred.promise;
@@ -24,7 +30,12 @@ define([
         save: function(habitsUnparsed) {
             var deferred = this.$q.defer();
 
-            setTimeout(function() {
+            // Often when sending data to the server, the format the server expects it
+            // may be slightly different from what the client sends.
+            // A parsing function is used to transform the data
+            var serverFormattedEvents = habitParser.encode(habitFormattedEvents);
+
+            setTimeout(function fakeServerPost() {
                 deferred.resolve();
             }, config.endpoints.loadingTime);
 
