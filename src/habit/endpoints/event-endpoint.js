@@ -7,14 +7,13 @@ define([
 ) {
     "use strict";
 
-    function EventEndpoint($q) {
-        this.$q = $q;
-    }
-
-    EventEndpoint.prototype = {
-        get: function() {
+    class EventEndpoint {
+        constructor($q) {
+            this.$q = $q;
+        }
+        get() {
             var deferred = this.$q.defer();
-            var serverFormattedEvents =  config.endpoints.events;
+            var serverFormattedEvents = config.endpoints.events;
 
             setTimeout(function fakeServerRequest() {
                 // Often when getting data from the server, the format the client expects it
@@ -25,8 +24,8 @@ define([
             }, config.endpoints.loadingTime);
 
             return deferred.promise;
-        },
-        save: function(clientFormattedEvents) {
+        }
+        save(clientFormattedEvents) {
             var deferred = this.$q.defer();
 
             // Often when sending data to the server, the format the server expects it
@@ -40,8 +39,7 @@ define([
 
             return deferred.promise;
         }
-
-    };
+    }
 
     EventEndpoint.$inject = ['$q'];
 

@@ -5,21 +5,20 @@ define([
 ) {
     "use strict";
 
-    function HabitModuleEndpoint($q, habitEndpoint, eventEndpoint) {
-        this.$q = $q;
-        this.habitEndpoint = habitEndpoint;
-        this.eventEndpoint = eventEndpoint;
-    }
-
-    HabitModuleEndpoint.prototype = {
-        getHabitsAndEvents: function () {
+    class HabitModuleEndpoint {
+        constructor ($q, habitEndpoint, eventEndpoint) {
+            this.$q = $q;
+            this.habitEndpoint = habitEndpoint;
+            this.eventEndpoint = eventEndpoint;
+        }
+        getHabitsAndEvents() {
             return this.$q.all([this.habitEndpoint.get(), this.eventEndpoint.get()]);
-        },
-        saveHabitsAndEvents: function (habit, events) {
+        }
+        saveHabitsAndEvents(habit, events) {
             this.$q.all([this.habitEndpoint.save(habits), this.eventEndpoint.save(events)]);
         }
 
-    };
+    }
 
     HabitModuleEndpoint.$inject = ['$q', 'habitEndpoint', 'eventEndpoint'];
 

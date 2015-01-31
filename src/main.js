@@ -1,6 +1,6 @@
 
 require.config({
-    baseUrl: '.',
+    baseUrl: '../dist/',
     paths: {
         'app':'./app',
         'main':'./main',

@@ -8,12 +8,11 @@ define([
     "use strict";
 
 
-    function HabitEndpoint($q) {
-        this.$q = $q;
-    }
-
-    HabitEndpoint.prototype = {
-        get: function () {
+    class HabitEndpoint {
+        constructor($q) {
+            this.$q = $q;
+        }
+        get() {
             var deferred = this.$q.defer();
             var serverFormattedHabits = config.endpoints.habits;
 
@@ -26,8 +25,8 @@ define([
             }, config.endpoints.loadingTime);
 
             return deferred.promise;
-        },
-        save: function(habitsUnparsed) {
+        }
+        save(habitsUnparsed) {
             var deferred = this.$q.defer();
 
             // Often when sending data to the server, the format the server expects it
@@ -41,8 +40,7 @@ define([
 
             return deferred.promise;
         }
-
-    };
+    }
 
     HabitEndpoint.$inject = ['$q'];
 

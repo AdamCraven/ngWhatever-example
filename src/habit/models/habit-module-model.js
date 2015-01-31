@@ -3,7 +3,7 @@ define([
     './habit-collection',
     '../../common/models/loading-model',
     '../../common/models/error-model',
-], function (
+], function(
     EventCollection,
     HabitCollection,
     LoadingModel,
@@ -12,25 +12,23 @@ define([
 
     "use strict";
 
-    function HabitModuleModel(modelData) {
-        // The controllers use public objects to the display the view.
-        this.loading = new LoadingModel();
-        this.error = new ErrorModel();
-        this.habits = new HabitCollection();
-        this.events = new EventCollection();
+    class HabitModuleModel {
+        constructor(modelData) {
+            // The controllers use public objects to the display the view.
+            this.loading = new LoadingModel();
+            this.error = new ErrorModel();
+            this.habits = new HabitCollection();
+            this.events = new EventCollection();
 
-        if (modelData) {
-            this.create(modelData);
+            if (modelData) {
+                this.create(modelData);
+            }
         }
-    }
-
-
-    HabitModuleModel.prototype = {
-        create: function (modelData) {
+        create(modelData) {
             this.habits.create(modelData.habits);
             this.events.create(modelData.events);
         }
-    };
+    }
 
     return HabitModuleModel;
 });

@@ -9,27 +9,25 @@ define([
         return 'id'+Math.random();
     }
 
-    function HabitCollection(habitsArr) {
-        this._habits = [];
-        if(habitsArr) {
-            this.create(habitsArr);
+    class HabitCollection {
+        constructor (habitsArr) {
+            this._habits = [];
+            if(habitsArr) {
+                this.create(habitsArr);
+            }
         }
-    }
-
-    HabitCollection.prototype = {
-        create: function (habitsArr) {
+        create (habitsArr) {
             this._habits = habitsArr.map(function (habit) {
                 return new HabitModel(habit);
             });
-        },
-        read: function () {
+        }
+        read () {
             return this._habits;
-        },
-        remove: function () {
+        }
+        remove() {
             // not implemented
         }
-
-    };
+    }
 
     return HabitCollection;
 });
