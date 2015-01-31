@@ -1,7 +1,7 @@
 
 <table
     class="habit-table table table-bordered palette palette-turquoise"
-    ng-class="{ 'loading': controller.isLoading() }">
+    ng-class="{ 'loading': vm.isLoading() }">
     <colgroup>
         <col></col>
         <col></col>
@@ -30,7 +30,7 @@
     </thead>
     <tbody class="tbody">
         <!-- Loop over the habitModels -->
-        <tr ng-repeat="habit in controller.getHabits()">
+        <tr ng-repeat="habit in vm.getHabits()">
             <td>
                 <!-- Display the name -->
                 <input type="text" ng-model="habit.name" />
@@ -43,21 +43,21 @@
                 -->
             </td>
             <!-- Loop over the eventModels -->
-            <td ng-repeat="event in controller.getEventsFilteredByHabit(habit)" class="{{event.rating()}}" >
+            <td ng-repeat="event in vm.getEventsFilteredByHabit(habit)" class="{{event.rating()}}" >
                 <input type="number" ng-model="event.points" />
             </td>
             <td>
-                {{ controller.getTotalPointsForHabit(habit) }}
+                {{ vm.getTotalPointsForHabit(habit) }}
             </td>
         </tr>
         <tr>
             <td>
                 <button
-                    ng-click="controller.save()"
+                    ng-click="vm.save()"
                     class="btn btn-block btn-info">Save</button>
             </td>
             <td colspan="7" class="bottom-expanded-row">Habit points this week</td>
-            <td>{{ controller.getTotalPoints() }}</td>
+            <td>{{ vm.getTotalPoints() }}</td>
         </td>
     </tbody>
 </table>

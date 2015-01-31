@@ -5,12 +5,15 @@ define([
 ) {
     "use strict";
 
-    return function habitFactoryDirective() {
+    return function habitFactoryDirective(habitViewModel) {
         return {
             restrict: 'E',
             template: template,
             scope : {},
-            controller : 'habitController as controller'
+            //controller : 'habitViewModel as vm',
+            link: function (scope) {
+                scope.vm = habitViewModel;
+            }
         };
     };
 });

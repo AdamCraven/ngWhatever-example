@@ -13,23 +13,22 @@ define(function () {
     	}
 
 
-    	function Api() {
-    		moduleController.setProtectedApi({
-    			protectedMethod: protectedMethod
-    		});
-    	}
-
-    	Api.prototype = {
-    		fetchData: function () {
+    	class Api {
+            constructor () {
+                moduleController.setProtectedApi({
+                    protectedMethod: protectedMethod
+                });
+            }
+    		fetchData () {
     			moduleController.fetchData();
     		}
-    	};
+    	}
 
     	return new Api();
 
     }
 
-    ApiWrapper.$inject = ['habitModuleController'];
+    ApiWrapper.$inject = ['habitController'];
 
     return ApiWrapper;
 });

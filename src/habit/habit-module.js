@@ -1,7 +1,7 @@
 define([
     './controllers/habit-controller',
     './directives/habit-table-directive',
-    './module-controllers/habit-module-controller',
+    './models/habit-view-model',
     './endpoints/habit-module-endpoint',
     './endpoints/habit-endpoint',
     './endpoints/event-endpoint',
@@ -10,7 +10,7 @@ define([
 ], function (
     HabitController,
     habitDirective,
-    HabitModuleController,
+    HabitViewModel,
     HabitModuleEndpoint,
     HabitEndpoint,
     EventEndpoint,
@@ -20,10 +20,11 @@ define([
     "use strict";
 
     var module = angular.module('habit', ['ngResource'])
-        .controller('habitController', HabitController)
+        //.controller('habitController', HabitController)
         .directive('habitTable', habitDirective)
         .constant('habitConfig', habitConfig)
-        .service('habitModuleController', HabitModuleController)
+        .service('habitController', HabitController)
+        .service('habitViewModel', HabitViewModel)
         .service('habitEndpoint', HabitEndpoint)
         .service('eventEndpoint', EventEndpoint)
         .service('habitModuleEndpoint', HabitModuleEndpoint)

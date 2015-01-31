@@ -1,49 +1,78 @@
-define(function() {
+define([], function() {
     "use strict";
 
-    /**
-     * The controller is an API for the view.
-     * It knows about the models and makes accessing them easier.
-     * It CAN NOT communicate with the server
-     * It DOES NOT handle data returned from the server.
-     */
-    class HabitFactoryController {
-        constructor($scope, moduleController) {
-            this.moduleController = moduleController;
-            this.model = moduleController.model;
+    class HabitController {
+        constructor($timeout, endpoint) {
+            this.model = null;
+            this.view = {};
+            this.$timeout = $timeout;
+            this.endpoint = endpoint;
         }
-        getHabits() {
-            // In this instance this method is mediating to the model.
-            // You can talk directly to the model.
-            // This is the presentation model/view model pattern which works well in larger applications.
-            //
-            // In larger modules you may need to seperate your domain logic from view logic, and thus create
-            // view models and domain models.
-            //
-            // The result would leave this controller with one method 'save', as the save function
-            // causes side effects outside of the module (communication with the server).
-            return this.model.habits.read();
+
+        setModel(model) {
+            this.model = model;
         }
-        getTotalPoints() {
-            return this.model.events.getTotalPoints();
+
+        setProtectedApi(protectedApi) {}
+        /**
+         * Setting the view in the module-controller generally isn't needed, you can just call a scope digest.
+         * But in larger apps, or when using custom renderers, that require more granular updating of the view
+         * it is very useful to be explicit about what you want to refresh
+         */
+        setView(viewController) {
+            this.view = viewController;
         }
-        getEventsFilteredByHabit(habit) {
-            return this.model.events.readByHabit(habit);
+        /**
+         * When retrieving information back from the endpoints, refreshing the view is as simple as triggering a
+         * root digest via the $timeout (which makes sure we aren't already in a digest). // Is that true?
+         * You could also do an explicit scope digest here to update only this scope (and children)
+         * Or an explicit render of the view
+         */
+        refreshView() {
+            this.$timeout(function refreshScope() {});
+            // this.view.render();
+            // this.$scope.$digest();
         }
-        getTotalPointsForHabit(habit) {
-            return this.model.events.getTotalPointsForHabit(habit);
+
+        fetchData() {
+            this.model.loading.setLoading();
+
+            this.endpoint.getHabitsAndEvents()
+                .then(function habitsAndEventsLoaded(habitsAndEvents) {
+                    this.model.create({
+                        habits: habitsAndEvents[0],
+                        events: habitsAndEvents[1]
+                    });
+                    this.success();
+                }.bind(this));
         }
-        isLoading() {
-            return this.model.loading.isLoading();
+
+        save(argument) {
+            this.model.loading.setLoading();
+
+            this.endpoint.saveHabitAndEvents(this.model.habits.read(), this.model.events.read())
+                .then(
+                    this.success.bind(this),
+                    this.fail.bind(this)
+                );
         }
-        save() {
-            // Saves the changes from the table.
-            // The module controller handles this as it can communicate with the server.
-            this.moduleController.save();
+
+        fail(error) {
+            this.model.error.setError(error);
+            this.model.loading.finishLoading();
+            this.refreshView();
+        }
+
+        success() {
+            this.model.error.clearErrors();
+            this.model.loading.finishLoading();
+            // The refresh view isn't needed with angular $q promises, but if you are using an external
+            // library, this would be required.
+            this.refreshView();
         }
     }
 
-    HabitFactoryController.$inject = ['$scope', 'habitModuleController'];
+    HabitController.$inject = ['$timeout', 'habitModuleEndpoint'];
 
-    return HabitFactoryController;
+    return HabitController;
 });

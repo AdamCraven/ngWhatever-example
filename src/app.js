@@ -11,10 +11,8 @@ define([
         'habit'
     ]).run(['habitApi', function (habitApi) {
         //Bootstrapping occurs here
-        habitApi.fetchData();
+        setTimeout(function() {habitApi.fetchData();}, 10);
     }]);
-
-
 
 
     return module;
