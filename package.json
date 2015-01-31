@@ -1,0 +1,26 @@
+{
+  "name": "a-better-module-structure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "gulp-6to5": "^3.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-6to5": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdamCraven/ngWhatever-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdamCraven/ngWhatever-example/issues"
+  },
+  "homepage": "https://github.com/AdamCraven/ngWhatever-example"
+}
