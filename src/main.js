@@ -5,7 +5,8 @@ require.config({
         'app':'./app',
         'main':'./main',
         'moment':'../bower_components/moment/moment',
-        'text': '../bower_components/requirejs-plugins/lib/text'
+        'text': '../bower_components/requirejs-plugins/lib/text',
+        'regenerator': '../node_modules/regenerator'
     },
     shim : {}
 
@@ -13,11 +14,11 @@ require.config({
 
 
 require([
+    'regenerator/runtime',
     'app'
 ], function(
 ) {
     "use strict";
-
 
     angular.bootstrap(document, ['main-app']);
 
