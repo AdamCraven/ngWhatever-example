@@ -1,18 +1,17 @@
 define(function() {
     "use strict";
 
-    function ErrorModel() {
-        this._errors = [];
-    }
-
-    ErrorModel.prototype = {
-        clearErrors: function () {
+    class ErrorModel {
+        constructor() {
             this._errors = [];
-        },
-        isErrors: function () {
+        }
+        clearErrors() {
+            this._errors = [];
+        }
+        isErrors() {
             return !!this._errors;
         }
-    };
+    }
 
     return ErrorModel;
 });

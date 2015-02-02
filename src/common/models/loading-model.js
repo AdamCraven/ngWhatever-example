@@ -1,21 +1,20 @@
 define(function() {
     "use strict";
 
-    function LoadingModel() {
-        this._loading = true;
-    }
-
-    LoadingModel.prototype = {
-        setLoading: function () {
+    class LoadingModel {
+        constructor() {
             this._loading = true;
-        },
-        finishLoading: function () {
+        }
+        setLoading() {
+            this._loading = true;
+        }
+        finishLoading() {
             this._loading = false;
-        },
-        isLoading: function () {
+        }
+        isLoading() {
             return this._loading;
         }
-    };
+    }
 
     return LoadingModel;
 });
