@@ -24,9 +24,9 @@ define([
         },
         /**
          * When retrieving information back from the endpoints, refreshing the view is as simple as triggering a
-         * root digest via the $timeout (which makes sure we aren't already in a digest). // Is that true?
-         * You could also do an explicit scope digest here to update only this scope (and children)
-         * Or an explicit render of the view
+         * root digest via the $timeout (which makes sure we aren't already in a digest).
+         * You could also use the more effiecient explicit scope.$digest() here to update only this scope (and children)
+         * Or an explicit render of the view, if for example your view is not an angular view (e.g. using d3.js to render)
          */
         refreshView: function() {
             this.$timeout(function refreshScope() {});
