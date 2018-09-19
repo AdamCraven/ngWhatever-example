@@ -1,4 +1,4 @@
-#ngWhatever - A better structure for Angular modules
+# ngWhatever - A better structure for Angular modules
 
 
 The module structure example is contained within: /src/habit
