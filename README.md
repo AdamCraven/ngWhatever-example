@@ -3,6 +3,6 @@
 
 The module structure example is contained within: /src/habit
 
-Read more about the structure: http://www.adamcraven.me/a-better-module-structure-for-angular/
+Read more about the structure: https://code.adamcrvn.com/a-better-module-structure-for-angular/
 
 
